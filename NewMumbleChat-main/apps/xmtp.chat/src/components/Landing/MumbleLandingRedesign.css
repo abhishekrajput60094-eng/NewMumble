@@ -1157,3 +1157,232 @@ ul {
         gap: var(--spacing-lg);
     }
 }
+
+
+/* 🌈 Universal RGB Card Glow Update */
+.feature-card,
+.tokenomic-card,
+.roadmap-item,
+.ramestta-card,
+.powered ul li,
+.faq-item {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, var(--glass-bg-opacity));
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--glass-shadow-1), var(--glass-shadow-inset);
+  transition: var(--transition-smooth);
+}
+
+/* Neon RGB glow border */
+.feature-card::before,
+.tokenomic-card::before,
+.roadmap-item::before,
+.ramestta-card::before,
+.powered ul li::before,
+.faq-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(
+    135deg,
+    #ff0055,
+    #ff7b00,
+    #ffee00,
+    #00ff88,
+    #00c3ff,
+    #7a00ff,
+    #ff00c8,
+    #ff0055
+  );
+  background-size: 400%;
+  animation: rgbGlow 8s linear infinite;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Smooth glowing hover effect */
+.feature-card:hover,
+.tokenomic-card:hover,
+.roadmap-item:hover,
+.ramestta-card:hover,
+.powered ul li:hover,
+.faq-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.3),
+              0 0 40px rgba(0, 123, 255, 0.2);
+}
+
+/* Subtle inner glow */
+.feature-card::after,
+.tokenomic-card::after,
+.roadmap-item::after,
+.ramestta-card::after,
+.powered ul li::after,
+.faq-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at top left, rgba(0, 242, 254, 0.08), transparent 60%);
+  z-index: 0;
+}
+
+/* RGB Gradient Animation */
+@keyframes rgbGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ✅ Responsive Optimization */
+@media (max-width: 768px) {
+  .feature-card,
+  .tokenomic-card,
+  .roadmap-item,
+  .ramestta-card,
+  .powered ul li,
+  .faq-item {
+    transform: none;
+    box-shadow: var(--glass-shadow-1);
+  }
+
+  .feature-card:hover,
+  .tokenomic-card:hover,
+  .roadmap-item:hover,
+  .ramestta-card:hover,
+  .powered ul li:hover,
+  .faq-item:hover {
+    transform: none;
+  }
+}
+
+
+
+/* 🌈 Stylish RGB Glow Buttons */
+button,
+.button,
+.btn,
+.primary-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem 0.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  font-size: 1rem;
+  color: #fff;
+  background: linear-gradient(135deg, #0072ff, #00f2fe);
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* RGB animated border glow */
+button::before,
+.button::before,
+.btn::before,
+.primary-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(
+    135deg,
+    #ff0055,
+    #ff7b00,
+    #ffee00,
+    #00ff88,
+    #00c3ff,
+    #7a00ff,
+    #ff00c8,
+    #ff0055
+  );
+  background-size: 400%;
+  animation: rgbGlow 6s linear infinite;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Inner subtle glow */
+button::after,
+.button::after,
+.btn::after,
+.primary-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at top left, rgba(0, 242, 254, 0.1), transparent 60%);
+  z-index: 0;
+}
+
+/* Hover effect — lifts slightly and adds glow */
+button:hover,
+.button:hover,
+.btn:hover,
+.primary-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
+  background: linear-gradient(135deg, #00f2fe, #0072ff);
+}
+
+/* Pressed state */
+button:active,
+.button:active,
+.btn:active,
+.primary-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+}
+
+/* Optional pulse animation for special buttons */
+.glow-pulse {
+  animation: pulseGlow 2s infinite alternate;
+}
+
+@keyframes rgbGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 8px rgba(0, 242, 254, 0.3); }
+  100% { box-shadow: 0 0 25px rgba(0, 242, 254, 0.7); }
+}
+
+/* ✅ Mobile Optimization */
+@media (max-width: 768px) {
+  button,
+  .button,
+  .btn,
+  .primary-btn {
+    width: 100%;
+    font-size: 0.6rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  button:hover,
+  .button:hover,
+  .btn:hover,
+  .primary-btn:hover {
+    transform: none;
+  }
+}

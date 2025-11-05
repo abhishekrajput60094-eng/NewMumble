@@ -158,7 +158,7 @@ export const MumbleLanding: FC = () => {
   const navClass = classNames("navbar", scrolled && "navbar-scrolled");
 
   return (
-    <div className="page">
+    <div className="page" style={{paddingRight:"10px",paddingLeft:"10px"}}>
       <div className="background" aria-hidden="true" />
       <header className={navClass}>
         <div className="nav-container">
