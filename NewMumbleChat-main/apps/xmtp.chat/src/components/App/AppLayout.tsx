@@ -9,7 +9,7 @@ import { useXMTP } from "@/contexts/XMTPContext";
 import { useRedirect } from "@/hooks/useRedirect";
 import { CenteredLayout } from "@/layouts/CenteredLayout";
 import {
-  MainLayout,
+
   MainLayoutContent,
   MainLayoutNav,
 } from "@/layouts/MainLayout";
@@ -23,7 +23,7 @@ export const AppLayout: React.FC = () => {
 
   useEffect(() => {
     if (!client) {
-      // save the current path to redirect to it after the client is initialized
+      // save redirect path
       if (
         location.pathname !== "/welcome" &&
         location.pathname !== "/disconnect"
@@ -34,31 +34,46 @@ export const AppLayout: React.FC = () => {
     }
   }, [client]);
 
-  // Close sidebar on route change (mobile)
+  // Close sidebar when route changes
   useEffect(() => {
     close();
   }, [location.pathname]);
 
-  return !client ? (
-    <CenteredLayout fullScreen>
-      <LoadingOverlay visible />
-    </CenteredLayout>
-  ) : (
-    <MainLayout>
-      <div>
+  if (!client) {
+    return (
+      <CenteredLayout fullScreen>
+        <LoadingOverlay visible />
+      </CenteredLayout>
+    );
+  }
+
+  return (
+    <div className="app-layout">
+      {/* Fixed Header */}
+      <header className="app-header-fixed">
         <AppHeader client={client} opened={opened} toggle={toggle} />
+      </header>
+
+      {/* Layout Wrapper */}
+      <div className="">
+        <aside className={`app-sidebar ${opened ? "open" : ""}`}>
+          <MainLayoutNav opened={opened} toggle={toggle}>
+            <ConversationsNavbar />
+          </MainLayoutNav>
+        </aside>
+
+        {/* Scrollable Main Content */}
+        <main className="app-main-scrollable">
+          <MainLayoutContent>
+            <Outlet />
+          </MainLayoutContent>
+        </main>
       </div>
-      <div>
-        <MainLayoutNav opened={opened} toggle={toggle}>
-          <ConversationsNavbar />
-        </MainLayoutNav>
-        <MainLayoutContent>
-          <Outlet />
-        </MainLayoutContent>
-      </div>
-      <div>
+
+      {/* Fixed Footer */}
+      <footer className="app-footer-fixed">
         <AppFooter />
-      </div>
-    </MainLayout>
+      </footer>
+    </div>
   );
 };

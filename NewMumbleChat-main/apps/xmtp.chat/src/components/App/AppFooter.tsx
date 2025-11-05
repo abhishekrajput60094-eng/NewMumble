@@ -1,33 +1,54 @@
-import { Anchor, Flex, Group, Text } from "@mantine/core";
-import classes from "./AppFooter.module.css";
+import React from "react";
 
 export const AppFooter: React.FC = () => {
   return (
-    <Flex
-      align="center"
-      justify="space-between"
-      gap="md"
-      wrap="wrap"
-      className={classes.footer}
+    <footer
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        flexWrap: "wrap",
+        gap: "12px",
+        padding: "12px 20px",
+        borderTop: "1px solid #000",
+        backgroundColor: "#fff",
+        color: "#000",
+        fontFamily: "Inter, sans-serif",
+        fontSize: "0.9rem",
+      }}
     >
-      <Group gap="xs" className={classes.group}>
-        <Text className={classes.text}>
-          Built with
-        </Text>
-
-        <Anchor
+      {/* Left Side */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "6px",
+        }}
+      >
+        <span>Built with</span>
+        <a
           href="https://xmtp.org"
           target="_blank"
           rel="noopener noreferrer"
-          className={classes.anchor}
+          style={{
+            color: "#000",
+            textDecoration: "underline",
+            fontWeight: 600,
+          }}
         >
           XMTP
-        </Anchor>
-      </Group>
+        </a>
+      </div>
 
-      <Text className={classes.copyright}>
+      {/* Right Side */}
+      <span
+        style={{
+          fontSize: "0.85rem",
+          color: "#000",
+        }}
+      >
         © 2025 MumbleChat – Secure Messaging
-      </Text>
-    </Flex>
+      </span>
+    </footer>
   );
 };

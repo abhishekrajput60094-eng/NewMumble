@@ -30,6 +30,9 @@ export const MainLayoutNav: React.FC<{
 
       {/* Sidebar */}
       <aside className={`sidebar ${opened ? "sidebar-open" : ""}`}>
+        <button className="sidebar-close" onClick={toggle}>
+          ✕
+        </button>
         <nav className="sidebar-nav">{children}</nav>
       </aside>
     </>

@@ -1,26 +1,21 @@
-import { Badge, Box, Burger, Flex, Group, Stack, Text } from "@mantine/core";
+import React, { useEffect, useState } from "react";
 import type { Client } from "@xmtp/browser-sdk";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { AppMenu } from "@/components/App/AppMenu";
 import type { ContentTypes } from "@/contexts/XMTPContext";
 import { shortAddress } from "@/helpers/strings";
 import { useSettings } from "@/hooks/useSettings";
-import classes from "./AppHeader.module.css";
+import { AppMenu } from "@/components/App/AppMenu";
 
-const GlowingCircle = () => {
-  return (
-    <Box
-      w={6}
-      h={6}
-      bg="#0afff1"
-      style={{
-        borderRadius: "5%",
-        boxShadow: "0px 0px 6px 2px rgba(10, 255, 241, 0.45)",
-      }}
-    />
-  );
-};
+const GlowingCircle = () => (
+  <div
+    style={{
+      width: "6px",
+      height: "6px",
+      backgroundColor: "#000",
+      borderRadius: "50%",
+    }}
+  ></div>
+);
 
 export type AppHeaderProps = {
   client: Client<ContentTypes>;
@@ -36,12 +31,12 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
   const navigate = useNavigate();
   const { environment } = useSettings();
   const [accountIdentifier, setAccountIdentifier] = useState<string | null>(
-    null,
+    null
   );
 
   useEffect(() => {
     setAccountIdentifier(
-      client.accountIdentifier?.identifier.toLowerCase() ?? null,
+      client.accountIdentifier?.identifier.toLowerCase() ?? null
     );
   }, [client.accountIdentifier]);
 
@@ -50,44 +45,221 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
   };
 
   return (
-    <Flex align="center" justify="space-between" className={classes.shell}>
-      <Flex align="center" gap="md">
-        <div className={classes.burger}>
-          <Burger opened={opened} onClick={toggle} size="sm" />
+    <header
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1000,
+        width: "100%",
+        backgroundColor: "#fff",
+        borderBottom: "1px solid #000",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "0 16px",
+        fontFamily: "Inter, sans-serif",
+        color: "#000",
+        flexWrap: "wrap",
+        minHeight: "60px",
+      }}
+      className="app-header"
+    >
+      {/* LEFT SIDE: Burger + Logo + Text */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "12px",
+          flexShrink: 0,
+        }}
+      >
+        {/* Burger button */}
+        <button
+          onClick={toggle}
+          aria-label="Toggle menu"
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: "8px",
+            display: "inline-flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+          className="burger-button"
+        >
+          <div
+            style={{
+              width: "20px",
+              height: "2px",
+              backgroundColor: "#000",
+              margin: "3px 0",
+              transition: "0.3s",
+              transform: opened
+                ? "rotate(45deg) translate(4px, 4px)"
+                : "none",
+            }}
+          />
+          <div
+            style={{
+              width: "20px",
+              height: "2px",
+              backgroundColor: "#000",
+              margin: "3px 0",
+              opacity: opened ? 0 : 1,
+              transition: "0.3s",
+            }}
+          />
+          <div
+            style={{
+              width: "20px",
+              height: "2px",
+              backgroundColor: "#000",
+              margin: "3px 0",
+              transition: "0.3s",
+              transform: opened
+                ? "rotate(-45deg) translate(4px, -4px)"
+                : "none",
+            }}
+          />
+        </button>
+
+        {/* Logo + Text */}
+        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <div
+            style={{
+              backgroundColor: "#000",
+              color: "#fff",
+              width: "32px",
+              height: "32px",
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontWeight: 700,
+              fontSize: "0.9rem",
+              flexShrink: 0,
+            }}
+          >
+            MC
+          </div>
+          <div style={{ lineHeight: "1.2" }}>
+            <span
+              style={{ fontWeight: 700, fontSize: "1rem", color: "#000" }}
+            >
+              MumbleChat
+            </span>
+            <br />
+            <span style={{ fontSize: "0.75rem", color: "#444" }}>
+              Ramestta messaging
+            </span>
+          </div>
         </div>
-        <Group gap="sm" className={classes.brandGroup}>
-          <div className={classes.brandIcon}>MC</div>
-          <Stack
-            gap={2}
-            className=""
-            style={{ }}>
-            <Text className={classes.brandName}>MumbleChat</Text>
-            <Text className={classes.brandTagline}>Ramestta messaging</Text>
-          </Stack>
-        </Group>
-      </Flex>
-      <Group align="center" gap="sm" className={classes.controls}>
-        <Badge className={classes.environment} radius="lg" variant="light">
+      </div>
+
+      {/* RIGHT SIDE */}
+      <div
+        className="header-right"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+          flexWrap: "wrap",
+          justifyContent: "flex-end",
+          flex: 1,
+        }}
+      >
+        {/* Environment (hidden on small devices) */}
+        <div
+          className="env-box"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+            backgroundColor: "#f2f2f2",
+            padding: "4px 10px",
+            borderRadius: "12px",
+            border: "1px solid #000",
+            fontSize: "0.75rem",
+            fontWeight: 600,
+            flexShrink: 0,
+          }}
+        >
           <GlowingCircle />
-          <Text size="xs" fw={600}>
-            {environment}
-          </Text>
-        </Badge>
-        <Box
-          className={classes.account}
-          aria-label={accountIdentifier || ""}
-          role="button"
+          <span>{environment}</span>
+        </div>
+
+        {/* Account (hidden on small devices) */}
+        <div
+          className="account-box"
           tabIndex={0}
+          role="button"
           onClick={handleClick}
-          onKeyDown={(event) => {
-            if (event.key === "Enter" || event.key === " ") {
-              handleClick();
-            }
-          }}>
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") handleClick();
+          }}
+          style={{
+            cursor: "pointer",
+            border: "1px solid #000",
+            padding: "4px 10px",
+            borderRadius: "8px",
+            fontSize: "0.8rem",
+            fontWeight: 600,
+            backgroundColor: "#fff",
+            flexShrink: 0,
+          }}
+        >
           {accountIdentifier ? shortAddress(accountIdentifier) : "..."}
-        </Box>
-        <AppMenu />
-      </Group>
-    </Flex>
+        </div>
+
+        {/* Menu — always visible */}
+        <div className="menu-box">
+          <AppMenu />
+        </div>
+      </div>
+
+      <style>
+        {`
+          /* Hide burger on desktop */
+          @media (min-width: 768px) {
+            .burger-button {
+              display: none !important;
+            }
+          }
+
+          /* Responsive for small devices */
+          @media (max-width: 767px) {
+            .app-header {
+              flex-direction: column;
+              align-items: flex-start !important;
+              padding: 8px 12px !important;
+              gap: 8px;
+            }
+
+            .header-right {
+              width: 100%;
+              justify-content: space-between !important;
+              gap: 8px;
+            }
+
+            /* Hide environment + account */
+            .env-box,
+            .account-box {
+              display: none !important;
+            }
+
+            /* Menu box should align right */
+            .menu-box {
+              width: 100%;
+              display: flex;
+              justify-content: flex-end;
+            }
+          }
+        `}
+      </style>
+    </header>
   );
 };

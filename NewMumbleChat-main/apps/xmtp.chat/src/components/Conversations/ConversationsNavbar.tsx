@@ -1,10 +1,7 @@
-import { Badge, Box, Group, Text } from "@mantine/core";
-import { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { ConversationsList } from "@/components/Conversations/ConversationList";
 import { ConversationsMenu } from "@/components/Conversations/ConversationsMenu";
 import { useConversations } from "@/hooks/useConversations";
-import { ContentLayout } from "@/layouts/ContentLayout";
-import classes from "./ConversationsNavbar.module.css";
 
 export const ConversationsNavbar: React.FC = () => {
   const {
@@ -16,6 +13,7 @@ export const ConversationsNavbar: React.FC = () => {
     streamAllMessages,
     syncAll,
   } = useConversations();
+
   const stopConversationStreamRef = useRef<(() => void) | null>(null);
   const stopAllMessagesStreamRef = useRef<(() => void) | null>(null);
 
@@ -43,7 +41,6 @@ export const ConversationsNavbar: React.FC = () => {
     await startStreams();
   }, [syncAll, startStreams, stopStreams]);
 
-  // loading conversations on mount, and start streaming
   useEffect(() => {
     const loadConversations = async () => {
       await sync(true);
@@ -52,7 +49,6 @@ export const ConversationsNavbar: React.FC = () => {
     void loadConversations();
   }, []);
 
-  // stop streaming on unmount
   useEffect(() => {
     return () => {
       stopStreams();
@@ -60,52 +56,104 @@ export const ConversationsNavbar: React.FC = () => {
   }, []);
 
   return (
-    <ContentLayout
-      className={classes.shell}
-      headerClassName={classes.header}
-      contentClassName={classes.content}
-      title={
-        <Group align="center" gap="sm">
-          <Text size="lg" fw={700} c="var(--mantine-color-gray-0)">
-            Conversations
-          </Text>
-          <Badge
-            radius="md"
-            size="lg"
-            variant="light"
+    <aside
+      style={{
+        width: "300px",
+        minWidth: "280px",
+        // marginTop: "50px",
+        height: "80vh",
+        display: "flex",
+        // marginLeft:"20px",
+        flexDirection: "column",
+        backgroundColor: "#fff",
+        color: "#000",
+        fontFamily: "Inter, sans-serif",
+      }}
+    >
+      {/* Header */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "16px 20px",
+          borderBottom: "1px solid #000",
+          backgroundColor: "#f5f5f5",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <span
             style={{
-              background: "rgba(10, 255, 241, 0.16)",
-              color: "#0afff1",
-              border: "1px solid rgba(10, 255, 241, 0.28)",
-            }}>
+              fontSize: "1rem",
+              fontWeight: 700,
+              color: "#000",
+            }}
+          >
+            Conversations
+          </span>
+          <span
+            style={{
+              backgroundColor: "#fff",
+              borderRadius: "8px",
+              padding: "2px 8px",
+              fontSize: "0.8rem",
+              fontWeight: 600,
+              color: "#000",
+              border: "1px solid #000",
+            }}
+          >
             {conversations.length}
-          </Badge>
-        </Group>
-      }
-      loading={conversations.length === 0 && loading}
-      headerActions={
+          </span>
+        </div>
+
         <ConversationsMenu
           loading={syncing || loading}
           onSync={() => void handleSync()}
           onSyncAll={() => void handleSyncAll()}
           disabled={syncing}
         />
-      }
-      withScrollArea={false}>
-      {conversations.length === 0 ? (
-        <Box
-          display="flex"
-          style={{
-            flexGrow: 1,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          className={classes.empty}>
-          <Text>No conversations found</Text>
-        </Box>
-      ) : (
-        <ConversationsList conversations={conversations} />
-      )}
-    </ContentLayout>
+      </div>
+
+      {/* Content area */}
+      <div
+        style={{
+          flex: 1,
+          overflowY: "auto",
+          display: "flex",
+          flexDirection: "column",
+          backgroundColor: "#fff",
+        }}
+      >
+        {loading && conversations.length === 0 ? (
+          <div
+            style={{
+              flexGrow: 1,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#555",
+              fontSize: "0.95rem",
+            }}
+          >
+            Loading conversations...
+          </div>
+        ) : conversations.length === 0 ? (
+          <div
+            style={{
+              flexGrow: 1,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#777",
+              fontSize: "0.95rem",
+            }}
+          >
+            No conversations found
+          </div>
+        ) : (
+          <ConversationsList conversations={conversations} />
+        )}
+      </div>
+    </aside>
   );
 };

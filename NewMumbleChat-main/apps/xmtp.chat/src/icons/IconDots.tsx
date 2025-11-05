@@ -1,6 +1,6 @@
 export const IconDots = ({
   size = 20,
-  color = "currentColor",
+  color = "black",
   ...props
 }: {
   size?: number;
@@ -15,8 +15,7 @@ export const IconDots = ({
       fill="none"
       stroke={color}
       strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+   
       {...props}>
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
