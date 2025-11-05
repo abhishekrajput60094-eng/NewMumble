@@ -189,18 +189,6 @@ export const MumbleLanding: FC = () => {
               href="http://localhost:5173/welcome">
               Connect Wallet
             </a>
-            {/* <button
-              type="button"
-              className="menu-button"
-              aria-expanded={menuOpen}
-              aria-controls="mumble-mobile-nav"
-              onClick={() => {
-                setMenuOpen((value) => !value);
-              }}>
-              <span />
-              <span />
-              <span />
-            </button> */}
           </div>
         </div>
         {menuOpen && (

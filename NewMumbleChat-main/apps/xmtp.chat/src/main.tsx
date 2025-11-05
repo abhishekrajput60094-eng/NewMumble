@@ -32,18 +32,14 @@ import {
   metaMask,
   walletConnect,
 } from "wagmi/connectors";
+console.log("walletConnect:", walletConnect);
 import { App } from "./components/App/App";
 import { XMTPProvider } from "@/contexts/XMTPContext";
 import { queryClient } from "@/helpers/queries";
 
 export const config = createConfig({
   connectors: [
-    injected(),
-    coinbaseWallet({
-      appName: "xmtp.chat",
-    }),
-    metaMask(),
-    walletConnect({ projectId: import.meta.env.VITE_PROJECT_ID }),
+    walletConnect({ projectId: import.meta.env.VITE_PROJECT_ID || "" }),
   ],
   chains: [
     arbitrum,

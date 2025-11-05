@@ -128,6 +128,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
         </button>
 
         {/* Logo + Text */}
+        <a href="/">
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
           <div
             style={{
@@ -158,6 +159,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
             </span>
           </div>
         </div>
+        </a>
       </div>
 
       {/* RIGHT SIDE */}
