@@ -1,0 +1,179 @@
+/* Global CSS Variables for a modern, glossy, and professional look */
+:root {
+  /* Color Palette */
+  --color-primary: #007bff; /* A vibrant blue for primary actions */
+  --color-secondary: #6c757d; /* A subtle grey for secondary elements */
+  --color-accent: #00f2fe; /* A bright cyan for glowing effects and highlights */
+  --color-background-dark: #0a0a0a; /* Deep dark background */
+  --color-background-medium: #1a1a1a; /* Slightly lighter dark for cards/sections */
+  --color-background-light: #2a2a2a; /* Even lighter for interactive elements */
+  --color-text-light: #e0e0e0; /* Light text for readability on dark backgrounds */
+  --color-text-medium: #a0a0a0; /* Medium grey text for secondary info */
+  --color-text-dark: #606060; /* Dark grey text for subtle details */
+  --color-border: rgba(255, 255, 255, 0.1); /* Subtle white border for glass effects */
+
+  /* Glassmorphism / Neumorphism Effects */
+  --glass-bg-blur: 15px;
+  --glass-bg-opacity: 0.15;
+  --glass-border-opacity: 0.2;
+  --glass-shadow-1: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --glass-shadow-2: 0 10px 20px rgba(0, 0, 0, 0.2);
+  --glass-shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  /* Gradients */
+  --gradient-hero: linear-gradient(45deg, #007bff, #00f2fe);
+  --gradient-button-primary: linear-gradient(45deg, #007bff, #0056b3);
+  --gradient-button-secondary: linear-gradient(45deg, #6c757d, #5a6268);
+
+  /* Typography */
+  --font-family-primary: 'Inter', sans-serif; /* Modern sans-serif */
+  --font-size-base: 16px;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+  --font-size-xxl: 2rem;
+  --font-size-hero: 3.5rem;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-xxl: 4rem;
+
+  /* Border Radius */
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 16px;
+  --border-radius-full: 9999px;
+
+  /* Transitions */
+  --transition-speed: 0.3s;
+  --transition-ease: ease-in-out;
+  --transition-smooth: all var(--transition-speed) var(--transition-ease);
+
+  /* Z-index */
+  --z-low: 10;
+  --z-mid: 100;
+  --z-high: 1000;
+}
+
+/* Global Resets and Base Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: var(--font-size-base);
+}
+
+body {
+  font-family: var(--font-family-primary);
+  line-height: 1.6;
+  color: var(--color-text-light);
+  background-color: var(--color-background-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+a:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-sm);
+}
+
+p {
+  margin-bottom: var(--spacing-sm);
+}
+
+ul {
+  list-style: none;
+}
+
+/* Utility Classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.section-padding {
+  padding: var(--spacing-xxl) 0;
+}
+
+/* Glassmorphism Base */
+.glass-effect {
+  background-color: rgba(255, 255, 255, var(--glass-bg-opacity));
+  backdrop-filter: blur(var(--glass-bg-blur));
+  border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity));
+  box-shadow: var(--glass-shadow-1), var(--glass-shadow-inset);
+  transition: var(--transition-smooth);
+}
+
+.glass-effect:hover {
+  box-shadow: var(--glass-shadow-2), var(--glass-shadow-inset);
+}
+
+/* Buttons */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  border: none;
+  transition: var(--transition-smooth);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.button-primary {
+  background: var(--gradient-button-primary);
+  color: var(--color-text-light);
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.button-primary:hover {
+  background: linear-gradient(45deg, #0056b3, #007bff);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.button-secondary {
+  background: var(--gradient-button-secondary);
+  color: var(--color-text-light);
+  box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+}
+
+.button-secondary:hover {
+  background: linear-gradient(45deg, #5a6268, #6c757d);
+  box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
+  transform: translateY(-2px);
+}

@@ -1,0 +1,285 @@
+/* =============================
+   Header Shell
+============================= */
+.shell {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-high);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(var(--glass-bg-blur));
+  -webkit-backdrop-filter: blur(var(--glass-bg-blur));
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--glass-shadow-1);
+  transition: var(--transition-smooth);
+}
+
+/* =============================
+   Brand Section
+============================= */
+.brandGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  transition: var(--transition-smooth);
+  min-width: 0;
+  flex-shrink: 1;
+}
+
+.brandGroup:hover {
+  transform: translateY(-2px);
+}
+
+.brandIcon {
+  width: var(--spacing-xl);
+  height: var(--spacing-xl);
+  border-radius: var(--border-radius-md);
+  flex-shrink: 0;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-lg);
+  color: var(--color-text-light);
+  background: var(--gradient-button-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 123, 255, 0.3), var(--glass-shadow-inset);
+  transition: var(--transition-smooth);
+}
+
+.brandIcon:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(0, 123, 255, 0.4), var(--glass-shadow-inset);
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.brandName {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  background: linear-gradient(135deg, var(--color-text-light) 0%, var(--color-text-medium) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.brandTagline {
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-medium);
+}
+
+/* =============================
+   Controls Section
+============================= */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+}
+
+.environment {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 123, 255, 0.15);
+  color: var(--color-primary);
+  border: 1px solid rgba(0, 123, 255, 0.25);
+  padding: 5px 12px;
+  border-radius: var(--border-radius-md);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  transition: var(--transition-smooth);
+}
+
+.environment:hover {
+  background: rgba(0, 123, 255, 0.25);
+  border-color: rgba(0, 123, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.account {
+  position: relative;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-light);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+}
+
+.account:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+}
+
+/* =============================
+   Burger (Mobile Menu)
+============================= */
+.burger {
+  display: none;
+  margin: 1px;
+  background: var(--color-background-light);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  border-radius: var(--border-radius-sm);
+  transition: var(--transition-smooth);
+}
+
+.burger:hover {
+  background: var(--color-background-medium);
+  border-color: var(--color-accent);
+}
+
+@media (max-width: 1080px) {
+  .burger {
+    display: block;
+  }
+}
+
+/* =============================
+   Responsiveness
+============================= */
+
+/* Tablets (768px and below) */
+@media (max-width: 768px) {
+  .shell {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    gap: var(--spacing-xs);
+  }
+
+  .brandTagline {
+    font-size: 0.6rem;
+  }
+
+  .controls {
+    gap: var(--spacing-xs);
+  }
+
+  .account {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+}
+
+/* Large Phones (640px and below) */
+@media (max-width: 640px) {
+  .shell {
+    padding: var(--spacing-xs) var(--spacing-xs);
+  }
+
+  .brandGroup {
+    gap: var(--spacing-xs);
+  }
+
+  .brandTagline {
+    display: none;
+  }
+
+  .brandName {
+    font-size: var(--font-size-md);
+  }
+
+  .environment {
+    padding: 4px 8px;
+    font-size: 0.7rem;
+  }
+
+  .account {
+    padding: 5px 9px;
+  }
+}
+
+/* Medium Phones (540px and below) */
+@media (max-width: 540px) {
+  .shell {
+    padding: 6px 8px;
+  }
+
+  .brandName {
+    font-size: 0.95rem;
+  }
+
+  .brandIcon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .controls {
+    gap: 0.4rem;
+  }
+
+  .environment {
+    display: none; /* hide to prevent overlap */
+  }
+}
+
+/* Small Phones (420px and below) */
+@media (max-width: 420px) {
+  .shell {
+    padding: 6px;
+  }
+
+  .brandIcon {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+  }
+
+  .brandName {
+    font-size: 0.9rem;
+  }
+
+  .account {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+  }
+
+  .controls {
+    gap: 0.35rem;
+  }
+}
+
+/* Very Small Phones (360px and below) */
+@media (max-width: 360px) {
+  .brandName {
+    font-size: 0.85rem;
+  }
+
+  .account {
+    font-size: 0.7rem;
+    padding: 4px 7px;
+  }
+
+  .controls {
+    gap: 0.3rem;
+  }
+
+  .burger {
+    padding: 6px;
+  }
+}
